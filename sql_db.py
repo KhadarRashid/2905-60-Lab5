@@ -54,7 +54,7 @@ def create_table():
 def data():
     # Inserting some data to work with
     with sqlite3.connect(db) as conn:
-        conn.execute('INSERT INTO records values ("James", "Finland", 98)')  # add products
+        conn.execute('INSERT INTO records values ("James", "Finland", 98)')
         conn.execute('INSERT INTO records values ("Ian", "Canada", 99)')
         conn.execute('INSERT INTO records values ("Aaron", "Canada", 98)')
         conn.execute('INSERT INTO records values ("Chad", "USA", 99)')
