@@ -32,25 +32,14 @@ def drop_table():
     with sqlite3.connect(db) as conn:  
         conn.execute('DROP table if exists records')
     conn.close()
-
-def update_record():
-    # Getting the info for updating the records records
-    name = input('Please enter the record name you wish to update')
-    catches = int(input('Please enter the new number of catches'))
-
-    with sqlite3.connect(db) as conn:
-        conn.execute('UPDATE records SET catches = ? WHERE name = ?', (catches, name))
-    conn.close()
-    menu()
-
-
+    
 def create_table():
     # creating a anew table with 3 columns
     with sqlite3.connect(db) as conn:  
         conn.execute('create table if not exists records (name text, country text, catches int)')
     conn.close()
 
-
+    
 def data():
     # Inserting some data to work with
     with sqlite3.connect(db) as conn:
@@ -59,9 +48,9 @@ def data():
         conn.execute('INSERT INTO records values ("Aaron", "Canada", 98)')
         conn.execute('INSERT INTO records values ("Chad", "USA", 99)')
     conn.close()
-
-
-
+    
+    
+    
 def display_data():
     # Displaying all the data in the table currently
     conn = sqlite3.connect(db)
@@ -70,6 +59,16 @@ def display_data():
     for row in results:
         print(row)  
 
+    conn.close()
+    menu()
+
+def update_record():
+    # Getting the info for updating the records records
+    name = input('Please enter the record name you wish to update: ')
+    catches = int(input('Please enter the new number of catches: '))
+
+    with sqlite3.connect(db) as conn:
+        conn.execute('UPDATE records SET catches = ? WHERE name = ?', (catches, name))
     conn.close()
     menu()
 
@@ -90,7 +89,7 @@ def create_new_record():
 
 def delete_record():
     # Getting the name of the record to delete
-    delete_name = input('Please enter the name')
+    delete_name = input('Please enter the name: ')
     # Deleting from the database with the DELETE statement
     with sqlite3.connect(db) as conn:
         conn.execute('DELETE from records WHERE name = ?' , (delete_name,))
